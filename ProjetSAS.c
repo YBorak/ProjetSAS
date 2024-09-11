@@ -20,6 +20,7 @@ typedef struct {
 } etudiants;
 
 etudiants etudiant[100]; //Tableau General Etudiants.
+etudiants tmp[100];
 int count=0;
 int nEtudiant=0;
 int idc=1;
@@ -248,25 +249,19 @@ void rechercheEtudiant(){
 }
 
 
-void swap(int* a, int* b) {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
 void TrierEtudiant(){
-
-    int tmp=0;
+  
     printf("Tri par order alphabitique (A-Z, Z-A): ");
-    for(int i=0; i<count-1;i++){
-        for(int j=0;j<count-i-1;j++){
-            if(strcasecmp(etudiant[i].nom, etudiant[i+1].nom)==1){
-                //swap(&etudiant[i].nom, &etudiant[i+1].nom);
+    for(int i=0; i<count;i++){
+        for(int j=i+1;j<count;j++){
+            if(strcasecmp(etudiant[i].nom, etudiant[j].nom)>0){
+                tmp[100] = etudiant[j];
+                etudiant[j] = etudiant[i];
+                etudiant[i] = tmp[100];
             }
             //count--;
         }
         printf("%s",etudiant[i].nom);
     }
-
 }
 
