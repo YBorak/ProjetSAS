@@ -20,20 +20,18 @@ typedef struct {
 } etudiants;
 
 etudiants etudiant[100]; //Tableau General Etudiants.
-etudiants tmp[100];
 int count=0;
 int nEtudiant=0;
 int idc=1;
-char filiere[100];
 
 
 void ajouterEtudiant();
-void modifierSuppEtudiant();
+//void modifierSuppEtudiant();
 void afficherDetailsEtudiant();
 void calculerMoyenneEtudiant();
 //void Statistiques();
-void rechercheEtudiant();
-void TrierEtudiant();
+//void rechercheEtudiant();
+//void TrierEtudiant();
 
 int main(){
 
@@ -57,12 +55,12 @@ int main(){
         switch(choix){
 
         case 1: ajouterEtudiant(); break;
-        case 2: modifierSuppEtudiant(); break;
+        //case 2: modifierSuppEtudiant(); break;
         case 3: afficherDetailsEtudiant(); break;
         case 4: calculerMoyenneEtudiant(); break;
         //case 5: Statistiques(); break;
-        case 6: rechercheEtudiant(); break;
-        case 7: TrierEtudiant(); break;
+        //case 6: rechercheEtudiant(); break;
+        //case 7: TrierEtudiant(); break;
         case 8: exit(1);
         default:
             printf("Erreur resayer a nouveau."); 
@@ -119,11 +117,11 @@ void ajouterEtudiant() {
 
             printf("Entrer le mois de naissance: ");
             scanf("%d", &etudiant[count].dateDeNaissance.annee);
-            if (etudiant[count].dateDeNaissance.annee < 1924 || etudiant[count].dateDeNaissance.annee > 2006) {
+            if (etudiant[count].dateDeNaissance.annee < 1950 || etudiant[count].dateDeNaissance.annee > 2050) {
                 printf("incorrecte!\n");
             }
 
-        } while (etudiant[count].dateDeNaissance.annee < 1924 || etudiant[count].dateDeNaissance.annee > 2006);
+        } while (etudiant[count].dateDeNaissance.annee < 1950 || etudiant[count].dateDeNaissance.annee > 2050);
 
         printf("Departement d etudiant: ");
         scanf("%s", etudiant[count].departement);
@@ -146,45 +144,12 @@ void ajouterEtudiant() {
 
 }
 
-
+/*
 void modifierSuppEtudiant(){
 
-    int trouveId=0, choixId=0;
-
-    printf("Entrer ID de letudiant que vous voulez modifier: ");
-    scanf("%d", &choixId);
-
-    for(int i=0;i<count+1;i++) {
-        trouveId=1;
-        if(etudiant[i].id == choixId) {
-            printf("Modifier le nom:");
-            scanf("%s", etudiant[i].nom);
-            printf("Modifier le prenom:");
-            scanf("%s", etudiant[i].prenom);
-            printf("Modifier la date de naissance jj/mm/yy:");
-            scanf("%d%d%d", &etudiant[i].dateDeNaissance.jour, &etudiant[i].dateDeNaissance.mois, &etudiant[i].dateDeNaissance.annee);
-            printf("Modifier la note general:");
-            scanf("%f", &etudiant[i].noteGenerale);
-        }
-    }
-    printf("\nLa modification a ete fait avec succes\n");
-
-    printf("Entrer ID de letudiant que vous voulez suprimer: ");
-    scanf("%d", &choixId);
-
-    for(int i=0;i<count;i++){
-        trouveId=1;
-        for(int j=i;j<count;j++){
-            if(etudiant[i].id==choixId){
-                etudiant[j]=etudiant[j+1];
-            }
-            count--;
-        }
-    }
-    printf("\nLa modification a ete fait avec succes\n");
 
 }
-
+*/
 
 void afficherDetailsEtudiant(){
 
@@ -195,7 +160,7 @@ void afficherDetailsEtudiant(){
 
 void calculerMoyenneEtudiant(){
 
-
+    char filiere[100];
     printf("le departements que vous shouitez calculer: ");
     scanf("%s", filiere);
 
@@ -221,47 +186,11 @@ void calculerMoyenneEtudiant(){
 void Statistiques(){
 
 }
-*/
 void rechercheEtudiant(){
 
-    char rechEtu[100];
-
-    printf("Entrer le nom de de letudiant que vous shouitez trouver: ");
-    scanf("%s", rechEtu);
-
-    for(int i=0; i<count;i++){
-        if(strcmp(etudiant[i].nom, rechEtu)==0){
-            printf("Letudiant trouve par son nom:  \n");
-            printf("ID: %d | Nom: %s | Prenom: %s | Date de naissance: %d/%d/%d | Departement: %s | Note general: %.2f\n", etudiant[i].id, etudiant[i].nom, etudiant[i].prenom, etudiant[i].dateDeNaissance.jour, etudiant[i].dateDeNaissance.mois, etudiant[i].dateDeNaissance.annee, etudiant[i].departement, etudiant[i].noteGenerale); 
-        }
-    }
-
-
-    printf("Entrer le departement que vous shouitez trouver: ");
-    scanf("%s", filiere);
-
-    for(int i=0; i<count;i++){
-        if(strcmp(etudiant[i].departement, filiere)==0){
-            printf("Les etudiants trouve par departement :  \n");
-            printf("ID: %d | Nom: %s | Prenom: %s | Date de naissance: %d/%d/%d | Departement: %s | Note general: %.2f\n", etudiant[i].id, etudiant[i].nom, etudiant[i].prenom, etudiant[i].dateDeNaissance.jour, etudiant[i].dateDeNaissance.mois, etudiant[i].dateDeNaissance.annee, etudiant[i].departement, etudiant[i].noteGenerale); 
-        }
-    }
 }
-
-
 void TrierEtudiant(){
-  
-    printf("Tri par order alphabitique (A-Z, Z-A): ");
-    for(int i=0; i<count;i++){
-        for(int j=i+1;j<count;j++){
-            if(strcasecmp(etudiant[i].nom, etudiant[j].nom)>0){
-                tmp[100] = etudiant[j];
-                etudiant[j] = etudiant[i];
-                etudiant[i] = tmp[100];
-            }
-            //count--;
-        }
-        printf("%s",etudiant[i].nom);
-    }
+
 }
 
+*/
