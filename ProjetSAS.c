@@ -111,10 +111,9 @@ do{
         } while (etudiant[count].dateDeNaissance.jour < 1 || etudiant[count].dateDeNaissance.jour > 31 || etudiant[count].dateDeNaissance.mois < 1 || etudiant[count].dateDeNaissance.mois > 12 || etudiant[count].dateDeNaissance.annee < 1924 || etudiant[count].dateDeNaissance.annee > 2006);
 
         printf("\n");
-
-        printf("Departement d etudiant: ");
+    
+        printf("Departement d etudiant(physique, mathinfo, chimique, geologie): ");
         scanf("%s", etudiant[count].departement);
-
         printf("\n");
 
     do{
@@ -264,7 +263,24 @@ void Statistiques(){
 
     } else if (choix2==2){
 
+        printf("\nAffichage le nombre d etudiants dans chaque departement\n");      
 
+        int countPhysique=0, countMathinfo=0, countChimique=0, countGeologie=0;
+        for(int i=0; i<count;i++){
+        if(strcasecmp(etudiant[i].departement, "physique")==0){
+            countPhysique++;
+        } else if (strcasecmp(etudiant[i].departement, "mathinfo")==0){
+            countMathinfo++;
+        } else if (strcasecmp(etudiant[i].departement, "chimique")==0){
+            countChimique++;
+        } else if (strcasecmp(etudiant[i].departement, "geologie")==0){
+            countGeologie++;
+        }
+    }
+    printf("\nLe nombre d etudiant dans le departement Physique sont %d\n" , countPhysique);
+    printf("Le nombre d etudiant dans le departement Mathinfo sont %d\n" , countMathinfo);
+    printf("Le nombre d etudiant dans le departement Chimique sont %d\n" , countChimique);
+    printf("Le nombre d etudiant dans le departement Geologie sont %d\n" , countGeologie);
 
     } else if(choix2==3){
 
