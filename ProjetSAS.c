@@ -3,10 +3,8 @@
 #include <string.h>
 #define MAX 100
 
-int choix, choix2, nAfficher, temp;
+int choix, choix2, nAfficher, temp, nbr;
 int countPhysique=0, countMathinfo=0, countChimique=0, countBiologie=0;
-
-FILE *fptr;
 
 typedef struct {
     int jour;
@@ -28,7 +26,7 @@ int count=0;
 int nEtudiant=0;
 int idc=1;
 char filiere[100];
-etudiants tmp[0];
+etudiants tmp[50];
 
 
 void ajouterEtudiant();
@@ -78,7 +76,7 @@ int main(){
 
     return 0;
 }
-    int nbr;
+
 
 void ajouterEtudiant() {
 
@@ -147,7 +145,6 @@ do{
     }
 
 }
-
 
 void modifierSuppEtudiant(){
 
@@ -317,16 +314,18 @@ void Statistiques(){
     } else if(choix2==4){
 
         printf("\nAffichage 3 etudiants ayant les meilleures notes.\n");      
-        for (int i = 0; i < count-1; i++) {
+        for (int i = 0; i < count; i++) {
             for (int j = i + 1; j < count; j++) {
             if (etudiant[i].noteGenerale < etudiant[j].noteGenerale) {
 
-            tmp[0] = etudiant[i];
+            etudiants temp = etudiant[i];
             etudiant[i] = etudiant[j];
-            etudiant[j] = tmp[0];
+            etudiant[j] = temp;
             }
         }
-        printf("L'etudiant %s %s a eu une note de %.2f sur 20.\n", etudiant[i].nom, etudiant[i].prenom, etudiant[i].noteGenerale);
+        //for(int i=0;i<count && i<3;i++){
+        printf("\nL'etudiant %s %s a eu une note de %.2f sur 20.\n", etudiant[i].nom, etudiant[i].prenom, etudiant[i].noteGenerale);
+        //}
     }
 
     } else if(choix2==5){
@@ -366,7 +365,7 @@ void rechercheEtudiant(){
     scanf("%s", rechEtu);
 
     for(int i=0; i<count;i++){
-        if(strcmp(etudiant[i].nom, rechEtu)==0){
+        if(strcasecmp(etudiant[i].nom, rechEtu)==0){
             printf("\nL etudiant trouve par son nom:  \n");
             printf("ID: %d | Nom: %s | Prenom: %s | Date de naissance: %d/%d/%d | Departement: %s | Note general: %.2f\n", 
             etudiant[i].id, 
@@ -385,9 +384,9 @@ void rechercheEtudiant(){
     printf("\nEntrer le departement que vous shouitez trouver: ");
     scanf("%s", filiere);
 
+    printf("\nLe departement que vous shouitez trouve:\n");
     for(int i=0; i<count;i++){
-        if(strcmp(etudiant[i].departement, filiere)==0){
-            printf("\nLe departement que vous shouitez trouve:\n");
+        if(strcasecmp(etudiant[i].departement, filiere)==0){
             printf("ID: %d | Nom: %s | Prenom: %s | Date de naissance: %d/%d/%d | Departement: %s | Note general: %.2f\n", 
             etudiant[i].id, 
             etudiant[i].nom, 
@@ -435,17 +434,18 @@ void TrierEtudiant(){
 
         if(choix2==1){
 
-        printf("Tri par order alphabitique (A-Z)");
+        printf("Tri par order alphabitique (A-Z)\n");
         for(int i=0; i<count;i++){
             for(int j=i+1;j<count;j++){
             if(strcasecmp(etudiant[i].nom, etudiant[j].nom)>0){
-                tmp[0] = etudiant[i];
+                etudiants temp = etudiant[i];
                 etudiant[i] = etudiant[j];
-                etudiant[j] = tmp[0];
+                etudiant[j] = temp;
             }
         }
-        printf("Tri croissant:\n %s\t\n",etudiant[i].nom);
+        printf("Etudiant: %s %s\n",etudiant[i].nom, etudiant[i].prenom);
         }
+        main();
 
         } else if (choix2==2) {
 
@@ -453,13 +453,15 @@ void TrierEtudiant(){
         for(int i=0; i<count;i++){
             for(int j=i+1;j<count;j++){
             if(strcasecmp(etudiant[i].nom, etudiant[j].nom)<0){
-                tmp[0] = etudiant[j];
+                etudiants temp = etudiant[j];
                 etudiant[j] = etudiant[i];
-                etudiant[i] = tmp[0];
+                etudiant[i] = temp;
             }
         }
-        printf("Tri decroissant:\n %s\t\n", etudiant[i].nom);
+        printf("Etudiant: %s %s\n",etudiant[i].nom, etudiant[i].prenom);
         }
+        main();
+
 
         } else if (choix2==0) {
         } else{
@@ -486,9 +488,9 @@ void TrierEtudiant(){
         for(int i=0; i<count;i++){
             for(int j=i+1;j<count;j++){
             if(etudiant[i].noteGenerale < etudiant[j].noteGenerale){
-                tmp[0] = etudiant[i];
+                etudiants temp = etudiant[i];
                 etudiant[i] = etudiant[j];
-                etudiant[j] = tmp[0];
+                etudiant[j] = temp;
             }
         }
         printf("la moyenne generale de %s %s est %.2f\t\n", etudiant[i].nom, etudiant[i].prenom, etudiant[i].noteGenerale);
@@ -500,9 +502,9 @@ void TrierEtudiant(){
         for(int i=0; i<count;i++){
             for(int j=i+1;j<count;j++){
             if(etudiant[i].noteGenerale > etudiant[j].noteGenerale){
-                tmp[0] = etudiant[i];
+                etudiants temp = etudiant[i];
                 etudiant[i] = etudiant[j];
-                etudiant[j] = tmp[0];
+                etudiant[j] = temp;
             }
         }
         printf("moyenne generale de faible jusqu au elve: %.2f\t\n", etudiant[i].noteGenerale);
